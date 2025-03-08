@@ -1,3 +1,4 @@
+black>=25.1,<25.2
 Django>=5.1,<5.2
 ipython>=9.0,<9.1
 sql-formatter>=0.6,<0.7

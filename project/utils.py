@@ -1,6 +1,7 @@
 from django.db.models import QuerySet, Manager, Model
 from sql_formatter.core import format_sql
 
+
 def format_query(qs):
     if isinstance(qs, Model):
         qs = qs._base_manager
@@ -12,8 +13,5 @@ def format_query(qs):
     print(qs)
     return qs
 
-@property
-def query_(self):
-    return format_query(self)
 
-QuerySet.query_ = query_
+QuerySet.query_ = property(format_query())
