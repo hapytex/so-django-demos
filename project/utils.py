@@ -14,4 +14,4 @@ def format_query(qs):
     return qs
 
 
-QuerySet.query_ = property(format_query())
+QuerySet.query_ = property(format_query)
