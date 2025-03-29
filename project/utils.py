@@ -1,4 +1,4 @@
-from django.db.models import QuerySet, Manager, Model
+from django.db.models import Manager, Model, QuerySet
 from sql_formatter.core import format_sql
 
 
