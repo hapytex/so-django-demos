@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import Q
 
 
 class Topping(models.Model):
@@ -47,3 +48,13 @@ class Restaurant(models.Model):
     best_pizza = models.ForeignKey(
         Pizza, related_name="championed_by", on_delete=models.CASCADE
     )
+
+
+class UserSetting(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    is_default = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=('user',), condition=Q(is_default=True), name="user_is_default"),
+        ]
