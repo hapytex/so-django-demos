@@ -1,3 +1,5 @@
+import uuid
+
 from django.conf import settings
 from django.db import models
 
@@ -46,4 +48,18 @@ class Restaurant(models.Model):
     pizzas = models.ManyToManyField(Pizza, related_name="restaurants")
     best_pizza = models.ForeignKey(
         Pizza, related_name="championed_by", on_delete=models.CASCADE
+    )
+
+class Mining(models.Model):
+    mining_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,blank=True,null=True)
+    profile_pic = models.ImageField(upload_to='UploadedProfilePicture/', default="ProfileAvatar/avatar.png", blank=True)
+    following = models.ManyToManyField(
+        'Profile',  # Refers to the User model itself
+        symmetrical=False,  # If A follows B, B doesn't automatically follow A
+        related_name='followers',  # Reverse relationship: get followers of a user
+        blank=True,
     )
