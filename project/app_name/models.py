@@ -12,6 +12,10 @@ class Pizza(models.Model):
     name = models.CharField(max_length=50)
     toppings = models.ManyToManyField(Topping)
 
+    def save(self, *args, **kwargs):
+        print('saving item')
+        return super().save(*args, **kwargs)
+
     def __str__(self):
         return "%s (%s)" % (
             self.name,
