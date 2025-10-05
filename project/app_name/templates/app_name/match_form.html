@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Match form</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+        }
+        .double {
+            zoom: 300%;
+        }
+    </style>
+</head>
+<body>
+
+<form method="post">
+    {% csrf_token %}
+{{ form.media }}
+    {{ form.management_form }}
+    <table>
+        {% for subform in form %}
+            <tr>
+                <td>column:</td>
+                <td>{{ subform.source_column }}</td>
+                <td rowspan="2" class="double">}</td>
+                <td rowspan="2">{{ subform.target_column.value }}{{ subform.target_column }}</td>
+            </tr>
+            <tr>
+            <td>constant:</td>
+            <td>{{ subform.fixed_value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
